@@ -1,7 +1,7 @@
 (* Tree type *)
-type tree_t = Empty                         (* empty tree *)
-            | Leaf of int                   (* leaf *)
-            | Node of tree_t * int * tree_t (* node *)
+type 'a tree_t = Empty                              (* empty tree *)
+               | Leaf of 'a                         (* leaf *)
+               | Node of 'a tree_t * 'a * 'a tree_t (* node *)
 
 (* A tree is either of these:
      - `Empty`            : empty tree
@@ -15,7 +15,7 @@ let tree3 = Node (tree1, 4, tree2)
 let tree4 = Node (tree2, 5, tree3)
 
 (* Sum all the integers in a tree. *)
-(* sum_tree : tree_t -> int *)
+(* sum_tree : int tree_t -> int *)
 let rec sum_tree tree = match tree with
     Empty -> 0
   | Leaf (n) -> n
@@ -27,7 +27,7 @@ let test3 = sum_tree tree3 = 7
 let test4 = sum_tree tree4 = 15
 
 (* Returns a tree which has double values. *)
-(* tree_double : tree_t -> tree_t *)
+(* tree_double : int tree_t -> int tree_t *)
 let rec tree_double tree = match tree with
     Empty -> Empty
   | Leaf (n) -> Leaf (n * 2)
@@ -38,7 +38,7 @@ let test6 = tree_double tree2 = Leaf (6)
 let test7 = tree_double tree3 = Node (tree_double tree1, 8, tree_double tree2)
 let test8 = tree_double tree4 = Node (tree_double tree2, 10, tree_double tree3)
 
-(* tree_map : (int -> int) -> tree_t -> tree_t *)
+(* tree_map : ('a -> 'b) -> 'a tree_t -> 'b tree_t *)
 let rec tree_map f tree = match tree with
     Empty -> Empty
   | Leaf (n) -> Leaf (f n)
@@ -52,7 +52,7 @@ let test12 = tree_map (fun a -> a + 2) tree4
   = Node (tree_map (fun a -> a + 2) tree2, 7, tree_map (fun a -> a + 2) tree3)
 
 (* Returns sum of the number of nodes and leafs. *)
-(* tree_length : tree_t -> int *)
+(* tree_length : 'a tree_t -> int *)
 let rec tree_length tree = match tree with
     Empty -> 0
   | Leaf (_) -> 1
@@ -63,7 +63,7 @@ let test14 = tree_length tree2 = 1
 let test15 = tree_length tree3 = 2
 let test16 = tree_length tree4 = 4
 
-(* tree_depth : tree_t -> int *)
+(* tree_depth : 'a tree_t -> int *)
 let rec tree_depth tree = match tree with
     Empty -> 0
   | Leaf (_) -> 0

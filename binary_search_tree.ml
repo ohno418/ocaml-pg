@@ -1,7 +1,7 @@
 #use "tree.ml"
 
 (* Returns whether tree includes data. *)
-(* search : tree_t -> int -> bool *)
+(* search : 'a tree_t -> 'a -> bool *)
 let rec search tree data = match tree with
     Empty -> false
   | Leaf (n) -> n = data
@@ -27,7 +27,7 @@ let test8 = search tree5 7 = true
 let test9 = search tree5 8 = false
 
 (* Insert data into tree. *)
-(* insert_tree : tree_t -> int -> tree_t *)
+(* insert_tree : 'a tree_t -> 'a -> 'a tree_t *)
 let rec insert_tree tree data = match tree with
     Empty -> Leaf (data)
   | Leaf (n) ->
