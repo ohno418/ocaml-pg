@@ -47,7 +47,7 @@ let insert tree key value =
         blance t0 in
   let t0 = insert0 tree key value in
   match t0 with
-      Empty
+      Empty -> assert false
     | Node (_, _, _, Black, _) -> t0
     | Node (left, k, v, Red, right) ->
         match (left, right) with
